@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
     const {email, password} = this.form.getRawValue()
     localStorage.setItem('email', email)
     localStorage.setItem('password', password)
-    localStorage.setItem('auth', 'valid')
     this.router.navigate(['/dashboard']);
   }
 
@@ -36,7 +35,6 @@ export class LoginComponent implements OnInit {
     const {email, password} = this.form.getRawValue()
     localStorage.setItem('email', email)
     localStorage.setItem('password', password)
-    localStorage.setItem('auth', 'registered')
     this.router.navigate(['/dashboard']);
   }
 }

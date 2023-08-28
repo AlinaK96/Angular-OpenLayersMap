@@ -1,0 +1,22 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+header {
+    padding: 15px;
+}
+header .title {
+    font-size: 26px;
+}
+main {
+    display: flex;
+    flex-grow: 1;
+}
+.left-bar {
+    width: 20em;
+    background-color: var(--sidebar-color);
+}
+.map-container {
+    flex-grow: 1;
+}
