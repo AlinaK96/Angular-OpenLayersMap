@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -9,22 +10,33 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  constructor(
+    private router: Router,
+    private fb: FormBuilder
+    ) { }
+
+  ngOnInit(): void { }
   form = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
+    password: ['', [Validators.required, Validators.minLength(1)]],
   })
   error = ''
 
-  constructor (private fb: FormBuilder){}
 
   onSubmit(){
-    console.log('Submit: ', this.form.value);
-    
+    const {email, password} = this.form.getRawValue()
+    localStorage.setItem('email', email)
+    localStorage.setItem('password', password)
+    localStorage.setItem('auth', 'valid')
+    this.router.navigate(['/dashboard']);
   }
 
   createAccount(){
-    console.log('Create: ', this.form.value);
-    
+    const {email, password} = this.form.getRawValue()
+    localStorage.setItem('email', email)
+    localStorage.setItem('password', password)
+    localStorage.setItem('auth', 'registered')
+    this.router.navigate(['/dashboard']);
   }
 }
