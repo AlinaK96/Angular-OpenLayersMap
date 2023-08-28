@@ -7,3 +7,7 @@ body {
     --sidebar-color: #FAE6BE;
     --text-color: black;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
