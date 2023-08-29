@@ -14,6 +14,10 @@ const routes: Route[] = [
     path:'profile',
     loadComponent: () => import('./pages/profile/profile.component').then((mod) => mod.ProfileComponent)
   },
+  {
+    path:'animation',
+    loadComponent: () => import('./pages/animation/animation.component').then((mod) => mod.AnimationComponent)
+  },
 ];
 
 @NgModule({
