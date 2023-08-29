@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from 'src/app/components/header/header.component';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -14,5 +14,9 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent {
+  constructor(private router: Router) { }
 
+  goBack(){
+    this.router.navigate(['/dashboard']);
+  }
 }
