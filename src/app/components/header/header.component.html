@@ -1,4 +1,11 @@
-<header class="bg-sky-600 text-white">
-    <div class="title text-center ">{{title}}</div>
-    <p class="text-right font-bold"> {{name}}</p>
+<header class="bg-sky-600 text-white " >
+    <div class="title text-center flex flex-col items-stretch">{{title}}  
+        <button 
+        
+            class="text-right font-bold mr-5 animate-charcter"
+            (click)="goToProfile()"
+            title="Перейти в профиль"
+        > {{name}}
+        </button>
+    </div>
 </header>
