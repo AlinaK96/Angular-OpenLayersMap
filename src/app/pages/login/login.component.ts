@@ -20,21 +20,24 @@ export class LoginComponent implements OnInit {
   form = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(1)]],
+    Username: ['', [Validators.required, Validators.minLength(1)]]
   })
   error = ''
 
 
   onSubmit(){
-    const {email, password} = this.form.getRawValue()
+    const {email, Username, password } = this.form.getRawValue()
     localStorage.setItem('email', email)
     localStorage.setItem('password', password)
+    localStorage.setItem('Username', Username)
     this.router.navigate(['/dashboard']);
   }
 
   createAccount(){
-    const {email, password} = this.form.getRawValue()
+    const {email, Username, password} = this.form.getRawValue()
     localStorage.setItem('email', email)
     localStorage.setItem('password', password)
+    localStorage.setItem('Username', Username)
     this.router.navigate(['/dashboard']);
   }
 }

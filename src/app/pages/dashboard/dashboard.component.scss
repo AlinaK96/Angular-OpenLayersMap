@@ -14,8 +14,19 @@ main {
     flex-grow: 1;
 }
 .left-bar {
-    width: 20em;
+    width: 15em;
 }
 .map-container {
     flex-grow: 1;
+}
+
+.li:hover,
+.li:visited{
+    color: rgb(44, 51, 167);
+    cursor: pointer;
+}
+
+.li:active{
+    color: white;
+    text-decoration: underline;
 }
