@@ -10,6 +10,10 @@ const routes: Route[] = [
     path:'dashboard',
     loadComponent: () => import('./pages/dashboard/dashboard.component').then((mod) => mod.DashboardComponent)
   },
+  {
+    path:'profile',
+    loadComponent: () => import('./pages/profile/profile.component').then((mod) => mod.ProfileComponent)
+  },
 ];
 
 @NgModule({
