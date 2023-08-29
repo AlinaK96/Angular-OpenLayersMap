@@ -4,9 +4,8 @@ import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
-
 import { fromLonLat } from 'ol/proj';
-import { List } from 'src/app/interfaces/list';
+
 import { HeaderComponent } from 'src/app/components/header/header.component';
 
 @Component({
@@ -21,8 +20,6 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
 })
 export class DashboardComponent implements OnInit {
   map: Map = new Map;
-
-
 
   ngOnInit(): void {
     this.map = new Map({
