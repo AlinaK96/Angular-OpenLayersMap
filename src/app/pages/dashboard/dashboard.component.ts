@@ -7,41 +7,22 @@ import OSM from 'ol/source/OSM';
 
 import { fromLonLat } from 'ol/proj';
 import { List } from 'src/app/interfaces/list';
+import { HeaderComponent } from 'src/app/components/header/header.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    HeaderComponent
+  ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  title = 'Map Viewer - Openlayers & Angular'; 
-  name = localStorage.getItem('Username')
   map: Map = new Map;
 
-  listItems: List[] = [
-    {
-      name: 'Базовая карта',
-      link: 'https://tailwindcss.com/docs'
-    },
-    {
-      name: 'Регулирование прозрачности',
-      link: 'https://tailwindcss.com/docs'
-    },
-    {
-      name: 'Карта дорог разных стилей',
-      link: 'https://tailwindcss.com/docs'
-    },
-    {
-      name: 'Тур по карте',
-      link: 'https://tailwindcss.com/docs'
-    },
-    {
-      name: 'Движение на карте',
-      link: 'https://tailwindcss.com/docs'
-    },
-  ]
+
 
   ngOnInit(): void {
     this.map = new Map({
