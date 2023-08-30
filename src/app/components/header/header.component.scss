@@ -1,12 +1,12 @@
 
 header {
-    padding: 15px;
+    padding: 25px;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
 }
 header .title {
     font-size: 22px;
 }
-
-
 
 header button{
     width: 70px;
@@ -30,6 +30,7 @@ header button:hover{
     animation: textclip 2s linear infinite;
     display: inline-block;
 }
+
 @keyframes textclip {
     to {
         background-position: 200% center;
