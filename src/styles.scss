@@ -1,8 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,400;1,6..12,300&family=Poppins&display=swap');
 body {
-    font-family: 'Roboto';
-    color: var(--text-color);
-    margin: 0;
+    font-family: 'Poppins', sans-serif;
 }
 
 @tailwind base;
@@ -19,6 +17,7 @@ input:-webkit-autofill:active{
 .left-bar {
     width: 15em;
 }
+
 main {
     display: flex;
     flex-grow: 1;
@@ -58,6 +57,7 @@ header .title {
     animation: textclip 2s linear infinite;
     display: inline-block;
 }
+
 @keyframes textclip {
     to {
         background-position: 200% center;
@@ -66,4 +66,8 @@ header .title {
 
 .map-container {
     flex-grow: 1;
+    border-radius: 10px;
+    -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.78);
+    -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.78);
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.78);
 }

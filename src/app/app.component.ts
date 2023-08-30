@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-//import {ModalService} from './modal/modal.service'
 
 @Component({
   selector: 'app-root',
@@ -8,5 +7,4 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class AppComponent {
-  // constructor( public modalService: ModalService){}
 }
