@@ -4,8 +4,8 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-modal',
   standalone: true,
   templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss']
 })
+
 export class ModalComponent implements OnInit {
   coordX: any
   coordY: any
@@ -13,7 +13,6 @@ export class ModalComponent implements OnInit {
   ngOnInit(): void {
     this.getCoords()
   }
-
 
   getCoords(){
     this.coordX = localStorage.getItem('CoordX')
