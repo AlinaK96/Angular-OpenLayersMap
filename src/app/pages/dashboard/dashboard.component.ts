@@ -46,7 +46,9 @@ export class DashboardComponent implements OnInit {
     this.map.on('click', function(e){
       localStorage.setItem('CoordX', JSON.stringify(Math.round(e.coordinate[0])))
       localStorage.setItem('CoordY', JSON.stringify(Math.round(e.coordinate[1])))
+
     })
   }
+
 }
 
