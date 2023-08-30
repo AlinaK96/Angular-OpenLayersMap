@@ -8,6 +8,7 @@ import Map from 'ol/Map';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+
 export class MapComponent implements OnInit {
   @Input()
   map!: Map;
