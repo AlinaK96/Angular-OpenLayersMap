@@ -20,6 +20,7 @@ import {ModalComponent} from 'src/app/components/modal/modal.component'
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
+
 export class DashboardComponent implements OnInit {
   map: Map = new Map;
 
@@ -42,12 +43,6 @@ export class DashboardComponent implements OnInit {
       
       target: 'ol-map'
     });
-
-    this.map.on('click', function(e){
-      localStorage.setItem('CoordX', JSON.stringify(Math.round(e.coordinate[0])))
-      localStorage.setItem('CoordY', JSON.stringify(Math.round(e.coordinate[1])))
-
-    })
   }
 
 }
