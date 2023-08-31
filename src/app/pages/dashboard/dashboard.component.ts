@@ -97,30 +97,19 @@ export class DashboardComponent implements OnInit {
       target: 'ol-map'
     });
 
-    const LayersGroup = this.map.getLayers().getArray();
-    for (let layer of LayersGroup){
-      console.log(layer);
-      
-      const LayerName = layer.getClassName();
-      console.log('Название слоя ', LayerName);
-    }
-    
-
     const LayerElements = (document.querySelectorAll('.labelType > input[type=radio]'))
     let LayerElementArray = Array.from(LayerElements)
 
     for (let elem of LayerElementArray){
       elem.addEventListener('change', () =>{
-
         const LayerRadioButton = elem.id;
-        const LayersGroup = this.map.getLayers().forEach(function(element, index, array){
+        this.map.getLayers().forEach(function(element, index, array){
           const BaseLayerTitle = element.getClassName();
           element.setVisible(BaseLayerTitle === LayerRadioButton)
         });
         
       })
     }
-
   }
 
 }
