@@ -7,7 +7,6 @@ import OSM from 'ol/source/OSM';
 import { fromLonLat } from 'ol/proj';
 
 import { HeaderComponent } from 'src/app/components/header/header.component';
-import {ModalComponent} from 'src/app/components/modal/modal.component'
 import XYZ from 'ol/source/XYZ';
 import BingMaps from 'ol/source/BingMaps';
 
@@ -16,8 +15,7 @@ import BingMaps from 'ol/source/BingMaps';
   standalone: true,
   imports: [
     CommonModule,
-    HeaderComponent,
-    ModalComponent
+    HeaderComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
