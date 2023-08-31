@@ -16,4 +16,8 @@ export class HeaderComponent {
   goToProfile(){
     this.router.navigate(['/profile']);
   }
+
+  ExitProfile(){
+    this.router.navigate(['/']);
+  }
 }

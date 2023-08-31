@@ -1,11 +1,19 @@
 <header class="bg-slate-100 text-slate-400 " >
-    <div class="title flex flex-col">
-        <h2 class="text-center">{{title}}</h2>  
+    <h2 class="text-center text-xl">{{title}}</h2>  
+    <div class="title flex justify-between">
+        
         <button 
             class="text-right font-bold mr-5 animate-charcter"
             (click)="goToProfile()"
             title="Перейти в профиль"
         > {{name}}
+        </button>
+
+        <button 
+            class="text-right font-thin text-sm mr-5 animate-charcter"
+            (click)="ExitProfile()"
+            title="Выйти"
+            > Выход
         </button>
     </div>
 </header>
