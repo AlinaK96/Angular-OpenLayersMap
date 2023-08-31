@@ -24,6 +24,7 @@ import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
 
 export class DashboardComponent implements OnInit {
   map: Map = new Map;
+  openstreetMap:Map = new Map;
 
   ngOnInit(): void {
     this.MapInitialize()
@@ -39,13 +40,57 @@ export class DashboardComponent implements OnInit {
       layers: [
         new TileLayer({
           source: new OSM(),
-          opacity: 0
+          visible: true,
+          className: 'MapBase'
         }),
         new TileLayer({
-          source: new XYZ({
-            url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+          source: new OSM({
+            url: 'https://{a-c}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
           }),
-          opacity: 1
+          visible: false,
+          className: 'MapHumanitarian'
+        }),
+        new TileLayer({
+          source: new OSM({
+            url: 'https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}.png'
+          }),
+          visible: false,
+          className: 'MapBlack'
+        }),
+        new TileLayer({
+          source: new OSM({
+            url: 'https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg'
+          }),
+          visible: false,
+          className: 'MapStamen'
+        }),
+        new TileLayer({
+          source: new OSM({
+            url: 'https://cdn.lima-labs.com/{z}/{x}/{y}.png?api=demo'
+          }),
+          visible: false,
+          className: 'MapRoadLines'
+        }),
+        new TileLayer({
+          source: new OSM({
+            url: 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}.png'
+          }),
+          visible: false,
+          className: 'MapSepia'
+        }),
+        new TileLayer({
+          source: new OSM({
+            url: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}.png'
+          }),
+          visible: false,
+          className: 'MapDark'
+        }),
+        new TileLayer({
+          source: new OSM({
+            url: 'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}.png'
+          }),
+          visible: false,
+          className: 'MapDistrict'
         }),
       ],
       
