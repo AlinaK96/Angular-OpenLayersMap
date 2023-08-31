@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
   MapInitialize() {
     this.map = new Map({
       view: new View({
-        center : fromLonLat([ 86.0833 ,  55.3333]),
+        center : fromLonLat([86.0833 ,55.3333]),
         zoom: 12,
         minZoom: 4
       }),
@@ -96,6 +96,31 @@ export class DashboardComponent implements OnInit {
       
       target: 'ol-map'
     });
+
+    const LayersGroup = this.map.getLayers().getArray();
+    for (let layer of LayersGroup){
+      console.log(layer);
+      
+      const LayerName = layer.getClassName();
+      console.log('Название слоя ', LayerName);
+    }
+    
+
+    const LayerElements = (document.querySelectorAll('.labelType > input[type=radio]'))
+    let LayerElementArray = Array.from(LayerElements)
+
+    for (let elem of LayerElementArray){
+      elem.addEventListener('change', () =>{
+
+        const LayerRadioButton = elem.id;
+        const LayersGroup = this.map.getLayers().forEach(function(element, index, array){
+          const BaseLayerTitle = element.getClassName();
+          element.setVisible(BaseLayerTitle === LayerRadioButton)
+        });
+        
+      })
+    }
+
   }
 
 }
