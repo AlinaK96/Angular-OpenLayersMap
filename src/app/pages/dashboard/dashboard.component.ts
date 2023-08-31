@@ -94,6 +94,7 @@ export class DashboardComponent implements OnInit {
           className: 'MapDistrict'
         }),
       ],
+      
       target: 'ol-map'
     });
     
@@ -110,6 +111,7 @@ export class DashboardComponent implements OnInit {
         
       })
     }
+
   }
 
 }
