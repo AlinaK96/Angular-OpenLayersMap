@@ -8,6 +8,8 @@ import { fromLonLat } from 'ol/proj';
 
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import {ModalComponent} from 'src/app/components/modal/modal.component'
+import XYZ from 'ol/source/XYZ';
+import BingMaps from 'ol/source/BingMaps';
 
 @Component({
   selector: 'app-dashboard',
@@ -38,6 +40,13 @@ export class DashboardComponent implements OnInit {
       layers: [
         new TileLayer({
           source: new OSM(),
+          opacity: 0
+        }),
+        new TileLayer({
+          source: new XYZ({
+            url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+          }),
+          opacity: 1
         }),
       ],
       

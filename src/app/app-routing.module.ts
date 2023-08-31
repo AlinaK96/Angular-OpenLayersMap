@@ -13,6 +13,10 @@ const routes: Route[] = [
   {
     path:'profile',
     loadComponent: () => import('./pages/profile/profile.component').then((mod) => mod.ProfileComponent)
+  },
+  {
+    path:'overview',
+    loadComponent: () => import('./pages/overviewmap/overviewmap.component').then((mod) => mod.OverviewmapComponent)
   }
 ];
 
