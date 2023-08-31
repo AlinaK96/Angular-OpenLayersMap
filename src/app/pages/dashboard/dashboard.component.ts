@@ -35,20 +35,20 @@ export class DashboardComponent implements OnInit {
     this.map = new Map({
       view: new View({
         center : fromLonLat([86.0833 ,55.3333]),
-        zoom: 12,
+        zoom: 13,
         minZoom: 4
       }),
       layers: [
         new TileLayer({
           source: new OSM(),
-          visible: true,
+          visible: false,
           className: 'MapBase'
         }),
         new TileLayer({
           source: new OSM({
             url: 'https://{a-c}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
           }),
-          visible: false,
+          visible: true,
           className: 'MapHumanitarian'
         }),
         new TileLayer({
@@ -94,7 +94,6 @@ export class DashboardComponent implements OnInit {
           className: 'MapDistrict'
         }),
       ],
-      
       target: 'ol-map'
     });
     
