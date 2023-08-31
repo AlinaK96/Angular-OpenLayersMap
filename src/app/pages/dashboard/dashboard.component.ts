@@ -4,18 +4,19 @@ import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
+import XYZ from 'ol/source/XYZ';
 import { fromLonLat } from 'ol/proj';
 
 import { HeaderComponent } from 'src/app/components/header/header.component';
-import XYZ from 'ol/source/XYZ';
-import BingMaps from 'ol/source/BingMaps';
+import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
     CommonModule,
-    HeaderComponent
+    HeaderComponent,
+    SidebarComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
