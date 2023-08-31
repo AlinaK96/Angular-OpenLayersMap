@@ -9,6 +9,7 @@ import { fromLonLat } from 'ol/proj';
 
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
+import { Overlay } from 'ol';
 
 @Component({
   selector: 'app-dashboard',
@@ -96,7 +97,7 @@ export class DashboardComponent implements OnInit {
       
       target: 'ol-map'
     });
-
+    
     const LayerElements = (document.querySelectorAll('.labelType > input[type=radio]'))
     let LayerElementArray = Array.from(LayerElements)
 
