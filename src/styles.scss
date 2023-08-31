@@ -73,3 +73,21 @@ header .title {
     -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.78);
     box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.78);
 }
+
+.ol-control{
+    background-color: transparent !important;
+}
+
+.ol-control button:hover{
+    outline: none !important;
+    -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.78);
+    -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.78);
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.78);
+}
+
+.ol-control button {
+    color: rgba(34, 60, 80, 0.78) !important ;
+    background-color: #cbd5e1 !important;
+    opacity: 0.8;
+    outline: none;
+}
