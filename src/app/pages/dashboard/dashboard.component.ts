@@ -29,8 +29,10 @@ import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
 export class DashboardComponent implements OnInit {
   map: Map = new Map;
   openstreetMap:Map = new Map;
+  latitude = 86.089506
+  longitude = 55.354927
 
-  skytree = [86.089506,55.354927];
+  skytree = [this.latitude, this.longitude];
 
   iconFeature = new Feature({
     geometry: new Point(fromLonLat(this.skytree))
@@ -59,7 +61,8 @@ export class DashboardComponent implements OnInit {
       view: new View({
         center: fromLonLat(this.skytree),
         zoom: 14,
-        minZoom: 4
+        minZoom: 10,
+        maxZoom: 18
       }),
       layers: [
         new TileLayer({
@@ -125,9 +128,11 @@ export class DashboardComponent implements OnInit {
     this.iconFeature.setStyle(this.iconPinStyle);
     this.iconVectorSource.addFeature(this.iconFeature);
     let self = this;
-    // this.map.on("click", function(event) {
-    //     self.addSinglePin(event.coordinate[0], event.coordinate[1]);
-    // });
+    this.map.on("click", function(event) {
+        self.addSinglePin(event.coordinate[0], event.coordinate[1]);
+    });
+    
+    
   }
   
 
@@ -154,7 +159,6 @@ export class DashboardComponent implements OnInit {
         
       })
     }
-
   }
 
 }
