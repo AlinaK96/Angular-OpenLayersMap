@@ -125,10 +125,11 @@ export class DashboardComponent implements OnInit {
     this.iconFeature.setStyle(this.iconPinStyle);
     this.iconVectorSource.addFeature(this.iconFeature);
     let self = this;
-    this.map.on("click", function(event) {
-      self.addSinglePin(event.coordinate[0], event.coordinate[1]);
-    });
+    // this.map.on("click", function(event) {
+    //     self.addSinglePin(event.coordinate[0], event.coordinate[1]);
+    // });
   }
+  
 
   addSinglePin(horizontal: number, vertical: number): void {
     this.iconVectorSource.refresh();
@@ -138,6 +139,8 @@ export class DashboardComponent implements OnInit {
 
     this.iconFeature.setStyle(this.iconPinStyle);
     this.iconVectorSource.addFeature(this.iconFeature);
+
+    
     const LayerElements = (document.querySelectorAll('.labelType > input[type=radio]'))
     let LayerElementArray = Array.from(LayerElements)
 
