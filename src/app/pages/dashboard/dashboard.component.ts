@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import Map from 'ol/Map';
-import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
-import XYZ from 'ol/source/XYZ';
 import { fromLonLat } from 'ol/proj';
+import { Map, View, Feature } from "ol";
+import VectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
+import Icon from "ol/style/Icon";
+import Style from "ol/style/Style";
+import { Point } from "ol/geom";
+
 
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
-import { Overlay } from 'ol';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,6 +30,26 @@ export class DashboardComponent implements OnInit {
   map: Map = new Map;
   openstreetMap:Map = new Map;
 
+  skytree = [86.089506,55.354927];
+
+  iconFeature = new Feature({
+    geometry: new Point(fromLonLat(this.skytree))
+  });
+
+  iconVectorSource = new VectorSource({
+    features: []
+  });
+
+  iconVectorLayer = new VectorLayer({
+    source: this.iconVectorSource
+  });
+
+  iconPinStyle = new Style({
+    image: new Icon({
+      src: '../../../assets/pin.svg',
+    })
+  });
+
   ngOnInit(): void {
     this.MapInitialize()
   }
@@ -34,8 +57,8 @@ export class DashboardComponent implements OnInit {
   MapInitialize() {
     this.map = new Map({
       view: new View({
-        center : fromLonLat([86.0833 ,55.3333]),
-        zoom: 13,
+        center: fromLonLat(this.skytree),
+        zoom: 14,
         minZoom: 4
       }),
       layers: [
@@ -97,7 +120,24 @@ export class DashboardComponent implements OnInit {
       
       target: 'ol-map'
     });
-    
+
+    this.map.addLayer(this.iconVectorLayer);
+    this.iconFeature.setStyle(this.iconPinStyle);
+    this.iconVectorSource.addFeature(this.iconFeature);
+    let self = this;
+    this.map.on("click", function(event) {
+      self.addSinglePin(event.coordinate[0], event.coordinate[1]);
+    });
+  }
+
+  addSinglePin(horizontal: number, vertical: number): void {
+    this.iconVectorSource.refresh();
+    this.iconFeature = new Feature({
+      geometry: new Point([horizontal, vertical])
+    });
+
+    this.iconFeature.setStyle(this.iconPinStyle);
+    this.iconVectorSource.addFeature(this.iconFeature);
     const LayerElements = (document.querySelectorAll('.labelType > input[type=radio]'))
     let LayerElementArray = Array.from(LayerElements)
 
