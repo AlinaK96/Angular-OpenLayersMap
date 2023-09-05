@@ -31,11 +31,11 @@ export class DashboardComponent implements OnInit {
   openstreetMap:Map = new Map;
   latitude = 86.089506
   longitude = 55.354927
-
   skytree = [this.latitude, this.longitude];
 
   iconFeature = new Feature({
-    geometry: new Point(fromLonLat(this.skytree))
+    geometry: new Point(fromLonLat(this.skytree)),
+    center: 10
   });
 
   iconVectorSource = new VectorSource({
@@ -62,7 +62,7 @@ export class DashboardComponent implements OnInit {
         center: fromLonLat(this.skytree),
         zoom: 14,
         minZoom: 10,
-        maxZoom: 18
+        maxZoom: 18,
       }),
       layers: [
         new TileLayer({
@@ -128,14 +128,13 @@ export class DashboardComponent implements OnInit {
     this.iconFeature.setStyle(this.iconPinStyle);
     this.iconVectorSource.addFeature(this.iconFeature);
     let self = this;
+
     this.map.on("click", function(event) {
         self.addSinglePin(event.coordinate[0], event.coordinate[1]);
     });
-    
-    
+
   }
   
-
   addSinglePin(horizontal: number, vertical: number): void {
     this.iconVectorSource.refresh();
     this.iconFeature = new Feature({
@@ -146,7 +145,7 @@ export class DashboardComponent implements OnInit {
     this.iconVectorSource.addFeature(this.iconFeature);
 
     
-    const LayerElements = (document.querySelectorAll('.labelType > input[type=radio]'))
+  const LayerElements = (document.querySelectorAll('.labelType > input[type=radio]'))
     let LayerElementArray = Array.from(LayerElements)
 
     for (let elem of LayerElementArray){
