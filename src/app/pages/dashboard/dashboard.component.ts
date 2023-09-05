@@ -35,7 +35,8 @@ export class DashboardComponent implements OnInit {
 
   iconFeature = new Feature({
     geometry: new Point(fromLonLat(this.skytree)),
-    center: 10
+    center: 10,
+    
   });
 
   iconVectorSource = new VectorSource({
