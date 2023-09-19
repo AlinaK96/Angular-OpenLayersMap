@@ -13,6 +13,7 @@ import { Point } from "ol/geom";
 
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
+import { CoordService } from 'src/app/shared/coords.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,18 +29,25 @@ import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
 export class DashboardComponent implements OnInit {
   map: Map = new Map;
   openstreetMap:Map = new Map;
-  latitude = 86.089506
-  longitude = 55.354927
-  angle: number = 15
-  skytree = [this.latitude, this.longitude];
+  rotationAngle = 98
+  radius = 80
 
-  iconFeature = new Feature({
+  latitude: number = 86.089506
+  longitude: number = 55.354927
+
+  // latitude = this.radius * Math.cos(this.rotationEngle)
+  // longitude = this.radius * Math.sin(this.rotationEngle)
+
+  skytree: number[] = [this.latitude, this.longitude];
+
+
+  iconFeature: Feature = new Feature({
     geometry: new Point(fromLonLat(this.skytree)),
     center: 10,
     
   });
 
-  iconVectorSource = new VectorSource({
+  iconVectorSource:VectorSource = new VectorSource({
     features: []
   });
 
@@ -47,7 +55,7 @@ export class DashboardComponent implements OnInit {
     source: this.iconVectorSource
   });
 
-  iconPinStyle = new Style({
+  iconPinStyle: Style = new Style({
     image: new Icon({
       src: '../../../assets/pin.svg',
     })
@@ -55,9 +63,10 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.MapInitialize()
+    this.GetCoord()
   }
 
-  MapInitialize() {
+  MapInitialize(): void {
     this.map = new Map({
       view: new View({
         center: fromLonLat(this.skytree),
@@ -137,6 +146,7 @@ export class DashboardComponent implements OnInit {
   }
   
   addSinglePin(horizontal: number, vertical: number): void {
+
     this.iconVectorSource.refresh();
     this.iconFeature = new Feature({
       geometry: new Point([horizontal, vertical])
@@ -159,6 +169,15 @@ export class DashboardComponent implements OnInit {
         
       })
     }
+  }
+
+  GetCoord(): void{
+    console.log(this.latitude);
+    console.log(this.longitude);
+    console.log(this.rotationAngle);
+    console.log(this.radius);
+    
+    
   }
 
 }
