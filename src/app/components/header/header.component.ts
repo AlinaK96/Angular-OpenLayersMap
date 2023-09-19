@@ -8,16 +8,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  title = 'Map Viewer - Openlayers & Angular'; 
-  name = localStorage.getItem('Username')
+  title:string = 'Map Viewer - Openlayers & Angular'; 
+  name:string | null = localStorage.getItem('Username')
 
   constructor(private router: Router) { }
 
-  goToProfile(){
+  goToProfile():void{
     this.router.navigate(['/profile']);
   }
 
-  ExitProfile(){
+  ExitProfile():void{
     this.router.navigate(['/']);
   }
 }

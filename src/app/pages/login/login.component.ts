@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -16,15 +16,15 @@ export class LoginComponent implements OnInit {
     ) { }
 
   ngOnInit(): void { }
-  form = this.fb.nonNullable.group({
+  form: FormGroup = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(1)]],
     Username: ['', [Validators.required, Validators.minLength(1)]]
   })
-  error = ''
+  error: string = ''
 
 
-  onSubmit(){
+  onSubmit(): void{
     const {email, Username, password } = this.form.getRawValue()
     localStorage.setItem('email', email)
     localStorage.setItem('password', password)
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/dashboard']);
   }
 
-  createAccount(){
+  createAccount(): void{
     const {email, Username, password} = this.form.getRawValue()
     localStorage.setItem('email', email)
     localStorage.setItem('password', password)

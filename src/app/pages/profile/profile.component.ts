@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 export class ProfileComponent {
   constructor(private router: Router) { }
 
-  goBack(){
+  goBack():void{
     this.router.navigate(['/dashboard']);
   }
 }

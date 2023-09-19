@@ -22,8 +22,7 @@ import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
     HeaderComponent,
     SidebarComponent
   ],
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  templateUrl: './dashboard.component.html'
 })
 
 export class DashboardComponent implements OnInit {
@@ -31,6 +30,7 @@ export class DashboardComponent implements OnInit {
   openstreetMap:Map = new Map;
   latitude = 86.089506
   longitude = 55.354927
+  angle: number = 15
   skytree = [this.latitude, this.longitude];
 
   iconFeature = new Feature({
