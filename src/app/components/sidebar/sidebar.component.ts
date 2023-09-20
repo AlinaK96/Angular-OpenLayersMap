@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoordService } from 'src/app/shared/coords.service';
 import { FormsModule } from '@angular/forms';
@@ -11,20 +11,18 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./sidebar.component.scss']
 })
 
-export class SidebarComponent {
+export class SidebarComponent implements OnInit{
 
-
-  constructor (
-    public coordsService: CoordService
-  ){}
-
+  constructor (public coordsService: CoordService){}
   radius: number = this.coordsService.radius
 
+  ngOnInit(): void {
+    
+  }
 
   ChangeHandler() {
     this.coordsService.radius = this.radius
     this.coordsService.ChangeHandler()
   }
-
 
 }

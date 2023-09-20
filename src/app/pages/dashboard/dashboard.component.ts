@@ -28,17 +28,19 @@ import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
 export class DashboardComponent implements OnInit {
   map: Map = new Map;
   mapCenter: number[] = [86.089506, 55.354927];
+  Iconlatitude = 86.085455
+  Iconlongitude = 55.356324
+  iconCoord: number[] = [this.Iconlatitude, this.Iconlongitude]
+  alpha: number = 2 * 3.14
+  currentTime = Date.now()
+  radius = 30
 
-  // rotationAngle:number = 198
-  // radius: number = 35   55.346727, 86.190531
-  // latitude = 86.190531
-  // longitude = 55.346727
-  latitude = 86.085455
-  longitude = 55.356324
-  iconCoord: number[] = [this.latitude, this.longitude]
+  ngOnInit(): void {
+    this.MapInitialize()
+    this.changeMaps()
+  }
 
-
-
+  /* icon feature */
   iconFeature: Feature = new Feature({
     geometry: new Point(fromLonLat(this.iconCoord)),
     center: 10,
@@ -58,18 +60,13 @@ export class DashboardComponent implements OnInit {
     })
   });
 
-
-  ngOnInit(): void {
-    this.MapInitialize()
-    this.changeMaps()
-    this.addSinglePin(this.iconCoord[0], this.iconCoord[1]);
-  }
+  /* functions */
 
   MapInitialize(): void {
     this.map = new Map({
       view: new View({
         center: fromLonLat(this.mapCenter),
-        zoom: 14,
+        zoom: 23,
         minZoom: 10,
         maxZoom: 18,
       }),
@@ -132,8 +129,6 @@ export class DashboardComponent implements OnInit {
       target: 'ol-map'
     });
 
-    
-
     this.map.addLayer(this.iconVectorLayer);
     this.iconFeature.setStyle(this.iconPinStyle);
     this.iconVectorSource.addFeature(this.iconFeature);
@@ -142,7 +137,6 @@ export class DashboardComponent implements OnInit {
     this.map.on("click", function(event) {
         self.addPinOnClick(event.coordinate[0], event.coordinate[1]);
     });
-
   }
 
   changeMaps(): void {
@@ -161,15 +155,15 @@ export class DashboardComponent implements OnInit {
       }
     }
   
-  addSinglePin(horizontal: number, vertical: number): void {
-    this.map.addLayer(this.iconVectorLayer);
-    this.iconFeature.setStyle(this.iconPinStyle);
-    this.iconVectorSource.addFeature(this.iconFeature);
+  // addSinglePin(horizontal: number, vertical: number): void {
+  //   this.map.addLayer(this.iconVectorLayer);
+  //   this.iconFeature.setStyle(this.iconPinStyle);
+  //   this.iconVectorSource.addFeature(this.iconFeature);
 
-    this.iconFeature = new Feature({
-      geometry: new Point([horizontal, vertical])
-    });
-  }
+  //   this.iconFeature = new Feature({
+  //     geometry: new Point([horizontal, vertical])
+  //   });
+  // }
 
   addPinOnClick(horizontal: number, vertical: number): void{
     this.iconVectorSource.refresh();
@@ -182,21 +176,42 @@ export class DashboardComponent implements OnInit {
   }
 
 
+  // calc(time:any){
+  //   console.log('lat1' + this.Iconlatitude);
+  //   console.log('lon1' +this.Iconlongitude);
+  //   let start1 = this.Iconlatitude - this.radius * Math.cos(this.alpha * time)
+  //   let start2 = this.Iconlongitude - this.radius * Math.sin(this.alpha * time)
 
- // GetCoord(): void{
-    // console.log('lat1' + this.latitude);
-    // console.log('lon1' +this.longitude);
+  //   this.Iconlatitude = start1 + this.radius * Math.cos(this.alpha * time)
+  //   this.Iconlongitude = start2 + this.radius * Math.sin(this.alpha * time)
+  //   //x= x0 + raduis* Math.cos(alpha * time)
 
-    // this.latitude = this.latitude + this.radius * Math.cos(this.rotationAngle)
-    // this.longitude = this.longitude + this.radius * Math.sin(this.rotationAngle)
-    // //this.iconCoord= [this.latitude, this.longitude]
+  //   console.log('new: ' + this.Iconlatitude, '+' + this.Iconlongitude);
+  // }
+
+  // startTime = setInterval( ()=>{
+  //   let time = Date.now() - this.currentTime
+  //   this.calc(time)
+  // }, 10000)
+
+
+  /* II */
+
+  // calc(angle: number){
+  //   console.log('lat1' + this.Iconlatitude);
+  //   console.log('lon1' +this.Iconlongitude);
+
+  //   this.Iconlatitude = this.radius * Math.cos(angle)
+  //   this.Iconlongitude = this.radius * Math.sin(angle)
+
+  //   console.log('new' + this.Iconlatitude, '/' + this.Iconlongitude);
     
-    // console.log('lat new' + this.latitude);
-    // console.log('lon new' +this.longitude);
-    // console.log(this.rotationAngle);
-    // console.log(this.radius);
-    //this.addSinglePin(this.latitude, this.longitude)
-  //}
+  // }
+
+  //   startTime = setInterval( ()=>{
+  //     let angle = 180
+  //     this.calc(angle)
+  //   }, 5000)
 
 }
 
