@@ -13,7 +13,6 @@ import { Point } from "ol/geom";
 
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
-import { CoordService } from 'src/app/shared/coords.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,20 +28,18 @@ import { CoordService } from 'src/app/shared/coords.service';
 export class DashboardComponent implements OnInit {
   map: Map = new Map;
   openstreetMap:Map = new Map;
-  rotationAngle = 98
-  radius = 80
+  skytree: number[] = [86.089506, 55.354927];
 
-  latitude: number = 86.089506
-  longitude: number = 55.354927
+  rotationAngle:number = 198
+  radius: number = 35
+  latitude = 86.085455
+  longitude = 55.356324
+  iconCoord: number[] = [this.latitude, this.longitude]
 
-  // latitude = this.radius * Math.cos(this.rotationEngle)
-  // longitude = this.radius * Math.sin(this.rotationEngle)
-
-  skytree: number[] = [this.latitude, this.longitude];
 
 
   iconFeature: Feature = new Feature({
-    geometry: new Point(fromLonLat(this.skytree)),
+    geometry: new Point(fromLonLat(this.iconCoord)),
     center: 10,
     
   });
@@ -62,8 +59,12 @@ export class DashboardComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    // this.GetCoord()
     this.MapInitialize()
-    this.GetCoord()
+    this.changeMaps()
+
+
+
   }
 
   MapInitialize(): void {
@@ -134,51 +135,61 @@ export class DashboardComponent implements OnInit {
       target: 'ol-map'
     });
 
-    this.map.addLayer(this.iconVectorLayer);
-    this.iconFeature.setStyle(this.iconPinStyle);
-    this.iconVectorSource.addFeature(this.iconFeature);
-    let self = this;
+    
 
-    this.map.on("click", function(event) {
-        self.addSinglePin(event.coordinate[0], event.coordinate[1]);
-    });
+    // this.map.addLayer(this.iconVectorLayer);
+    // this.iconFeature.setStyle(this.iconPinStyle);
+    // this.iconVectorSource.addFeature(this.iconFeature);
+    // let self = this;
+
+    // this.map.on("click", function(event) {
+    //     self.addSinglePin(event.coordinate[0], event.coordinate[1]);
+    // });
 
   }
-  
-  addSinglePin(horizontal: number, vertical: number): void {
 
-    this.iconVectorSource.refresh();
-    this.iconFeature = new Feature({
-      geometry: new Point([horizontal, vertical])
-    });
+  changeMaps(): void {
+    const LayerElements = (document.querySelectorAll('.labelType > input[type=radio]'))
+      let LayerElementArray = Array.from(LayerElements)
 
-    this.iconFeature.setStyle(this.iconPinStyle);
-    this.iconVectorSource.addFeature(this.iconFeature);
-
-    
-  const LayerElements = (document.querySelectorAll('.labelType > input[type=radio]'))
-    let LayerElementArray = Array.from(LayerElements)
-
-    for (let elem of LayerElementArray){
-      elem.addEventListener('change', () =>{
-        const LayerRadioButton = elem.id;
-        this.map.getLayers().forEach(function(element, index, array){
-          const BaseLayerTitle = element.getClassName();
-          element.setVisible(BaseLayerTitle === LayerRadioButton)
-        });
-        
-      })
+      for (let elem of LayerElementArray){
+        elem.addEventListener('change', () =>{
+          const LayerRadioButton = elem.id;
+          this.map.getLayers().forEach(function(element, index, array){
+            const BaseLayerTitle = element.getClassName();
+            element.setVisible(BaseLayerTitle === LayerRadioButton)
+          });
+          
+        })
+      }
     }
-  }
+  
+  //addSinglePin(): void {
 
-  GetCoord(): void{
-    console.log(this.latitude);
-    console.log(this.longitude);
-    console.log(this.rotationAngle);
-    console.log(this.radius);
+    // this.iconVectorSource.refresh();
+    // this.iconFeature = new Feature({
+    //   geometry: new Point([horizontal, vertical])
+    // });
+
+    // this.iconFeature.setStyle(this.iconPinStyle);
+    // this.iconVectorSource.addFeature(this.iconFeature);}
+
+
+
+ // GetCoord(): void{
+    // console.log('lat1' + this.latitude);
+    // console.log('lon1' +this.longitude);
+
+    // this.latitude = this.latitude + this.radius * Math.cos(this.rotationAngle)
+    // this.longitude = this.longitude + this.radius * Math.sin(this.rotationAngle)
+    // //this.iconCoord= [this.latitude, this.longitude]
     
-    
-  }
+    // console.log('lat new' + this.latitude);
+    // console.log('lon new' +this.longitude);
+    // console.log(this.rotationAngle);
+    // console.log(this.radius);
+    //this.addSinglePin(this.latitude, this.longitude)
+  //}
 
 }
 
