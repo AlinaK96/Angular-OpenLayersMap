@@ -27,11 +27,12 @@ import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
 
 export class DashboardComponent implements OnInit {
   map: Map = new Map;
-  openstreetMap:Map = new Map;
-  skytree: number[] = [86.089506, 55.354927];
+  mapCenter: number[] = [86.089506, 55.354927];
 
-  rotationAngle:number = 198
-  radius: number = 35
+  // rotationAngle:number = 198
+  // radius: number = 35   55.346727, 86.190531
+  // latitude = 86.190531
+  // longitude = 55.346727
   latitude = 86.085455
   longitude = 55.356324
   iconCoord: number[] = [this.latitude, this.longitude]
@@ -41,7 +42,6 @@ export class DashboardComponent implements OnInit {
   iconFeature: Feature = new Feature({
     geometry: new Point(fromLonLat(this.iconCoord)),
     center: 10,
-    
   });
 
   iconVectorSource:VectorSource = new VectorSource({
@@ -58,19 +58,17 @@ export class DashboardComponent implements OnInit {
     })
   });
 
+
   ngOnInit(): void {
-    // this.GetCoord()
     this.MapInitialize()
     this.changeMaps()
-
-
-
+    this.addSinglePin(this.iconCoord[0], this.iconCoord[1]);
   }
 
   MapInitialize(): void {
     this.map = new Map({
       view: new View({
-        center: fromLonLat(this.skytree),
+        center: fromLonLat(this.mapCenter),
         zoom: 14,
         minZoom: 10,
         maxZoom: 18,
@@ -131,20 +129,19 @@ export class DashboardComponent implements OnInit {
           className: 'MapDistrict'
         }),
       ],
-      
       target: 'ol-map'
     });
 
     
 
-    // this.map.addLayer(this.iconVectorLayer);
-    // this.iconFeature.setStyle(this.iconPinStyle);
-    // this.iconVectorSource.addFeature(this.iconFeature);
-    // let self = this;
+    this.map.addLayer(this.iconVectorLayer);
+    this.iconFeature.setStyle(this.iconPinStyle);
+    this.iconVectorSource.addFeature(this.iconFeature);
+    let self = this;
 
-    // this.map.on("click", function(event) {
-    //     self.addSinglePin(event.coordinate[0], event.coordinate[1]);
-    // });
+    this.map.on("click", function(event) {
+        self.addPinOnClick(event.coordinate[0], event.coordinate[1]);
+    });
 
   }
 
@@ -164,15 +161,25 @@ export class DashboardComponent implements OnInit {
       }
     }
   
-  //addSinglePin(): void {
+  addSinglePin(horizontal: number, vertical: number): void {
+    this.map.addLayer(this.iconVectorLayer);
+    this.iconFeature.setStyle(this.iconPinStyle);
+    this.iconVectorSource.addFeature(this.iconFeature);
 
-    // this.iconVectorSource.refresh();
-    // this.iconFeature = new Feature({
-    //   geometry: new Point([horizontal, vertical])
-    // });
+    this.iconFeature = new Feature({
+      geometry: new Point([horizontal, vertical])
+    });
+  }
 
-    // this.iconFeature.setStyle(this.iconPinStyle);
-    // this.iconVectorSource.addFeature(this.iconFeature);}
+  addPinOnClick(horizontal: number, vertical: number): void{
+    this.iconVectorSource.refresh();
+    this.iconFeature = new Feature({
+      geometry: new Point([horizontal, vertical])
+    });
+
+    this.iconFeature.setStyle(this.iconPinStyle);
+    this.iconVectorSource.addFeature(this.iconFeature);
+  }
 
 
 
