@@ -178,7 +178,7 @@ export class DashboardComponent implements OnInit {
     this.x = this.Iconlatitude + this.radius * Math.cos(angle)
     this.y = this.Iconlongitude + this.radius * Math.sin(angle)
 
-    this.addPin(this.x, this.y)
+    //this.addPin(this.x, this.y)
     console.log('latitude ' + this.x);
     console.log('longtitude ' + this.y);
     console.log('');
@@ -192,6 +192,8 @@ export class DashboardComponent implements OnInit {
         this.angle = 0
       } else {
         this.calc(this.angle)
+        console.log(this.angle);
+        
       }      
     }, 5000)
 
