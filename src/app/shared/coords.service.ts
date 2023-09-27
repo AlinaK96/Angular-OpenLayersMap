@@ -5,11 +5,10 @@ import { Injectable } from '@angular/core';
 })
 
 export class CoordService {
-    public radius = 33
-
-    constructor (){}
+    public radius = 30
 
     ChangeHandler() {
-        console.log('radius: ' + this.radius);
+        this.radius = this.radius / 100000
+        console.log(this.radius);
     }
 }
