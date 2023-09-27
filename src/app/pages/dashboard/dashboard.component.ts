@@ -32,19 +32,18 @@ export class DashboardComponent implements OnInit {
 
   map: Map = new Map;
   mapCenter: number[] = [86.088051, 55.354789];
-  context: any; 
-  container: any; 
 
   Iconlatitude = 86.088051
   Iconlongitude = 55.354789
   iconCoord: number[] = [this.Iconlatitude, this.Iconlongitude]
 
-  radius: number = 50
+  radius: number = this.coordinates.radius
   angle: number = 0
   x: number = 0
   y: number = 0
 
-
+  context: any; 
+  container: any; 
 
   ngOnInit(): void {
     this.MapInitialize()
@@ -76,30 +75,27 @@ export class DashboardComponent implements OnInit {
 
   circle(): void{
     let currentAngle = 0; 
-    let Radius = this.radius;
-    let baseX = 100;
-    let baseY = 100; 
+    let baseX = 50;
+    let baseY = 50; 
     this.container = document.createElement("canvas");
-    this.container.width = 200; 
-    this.container.height = 200; 
-
+    this.container.width = 100; 
+    this.container.height = 100; 
   
     document.body.appendChild(this.container); 
-    this.context = this.container.getContext('2d');
-
-    this.context.fillStyle = '#f7f6f1'; 
+  
+     this.context = this.container.getContext('2d'); 
+     this.context.fillStyle = '#f0eee4'; 
     this.context.fillRect(0, 0, this.container.width, this.container.height); 
   
     setInterval(() =>{   
-      
-       this.context.fillStyle = '#f7f6f1';
+       this.context.fillStyle = '#f0eee4';
        this.context.fillRect(0, 0, this.container.width, this.container.height);
   
-       let vx = Math.cos(currentAngle)*Radius;
-       let vy = Math.sin(currentAngle)*Radius;
+       let vx = Math.cos(currentAngle)*this.radius;
+       let vy = Math.sin(currentAngle)*this.radius;
        
        this.context.fillStyle = '#0f766e';
-       this.context.fillRect(baseX+vx, baseY+vy, 15, 15);
+      this.context.fillRect(baseX+vx, baseY+vy, 15, 15);
        currentAngle+=0.1;
   
        }, 100)
@@ -110,8 +106,8 @@ export class DashboardComponent implements OnInit {
       view: new View({
         center: fromLonLat(this.mapCenter),
         zoom: 17,
-        minZoom: 10,
-        maxZoom: 18,
+        minZoom: 17,
+        maxZoom: 17,
       }),
       layers: [
         new TileLayer({
@@ -213,6 +209,10 @@ export class DashboardComponent implements OnInit {
   calc(angle: number):void{
     this.x = this.Iconlatitude + this.radius * Math.cos(angle)
     this.y = this.Iconlongitude + this.radius * Math.sin(angle)
+
+    console.log('latitude: ' + this.x);
+    console.log('longtitude: ' + this.y);
+    //this.addPin(this.x, this.y)
   }
 
     pinRotation = setInterval( ()=>{
@@ -220,9 +220,10 @@ export class DashboardComponent implements OnInit {
       if (this.angle > 360){
         this.angle = 0
       } else {
-        this.calc(this.angle)
+        this.calc(this.angle) 
+        console.log('angle: ' + this.angle);
         
       }      
-    }, 5000)
+    }, 100)
 
 }
