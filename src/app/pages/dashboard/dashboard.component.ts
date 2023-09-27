@@ -32,19 +32,24 @@ export class DashboardComponent implements OnInit {
 
   map: Map = new Map;
   mapCenter: number[] = [86.088051, 55.354789];
+  context: any; 
+  container: any; 
 
   Iconlatitude = 86.088051
   Iconlongitude = 55.354789
   iconCoord: number[] = [this.Iconlatitude, this.Iconlongitude]
 
-  radius: number = this.coordinates.radius / 100000
+  radius: number = 50
   angle: number = 0
   x: number = 0
   y: number = 0
 
+
+
   ngOnInit(): void {
     this.MapInitialize()
     this.changeMaps()
+    this.circle()
   }
   
   /* icon feature */
@@ -68,6 +73,37 @@ export class DashboardComponent implements OnInit {
   });
 
   /* functions */
+
+  circle(): void{
+    let currentAngle = 0; 
+    let Radius = this.radius;
+    let baseX = 100;
+    let baseY = 100; 
+    this.container = document.createElement("canvas");
+    this.container.width = 200; 
+    this.container.height = 200; 
+
+  
+    document.body.appendChild(this.container); 
+    this.context = this.container.getContext('2d');
+
+    this.context.fillStyle = '#f7f6f1'; 
+    this.context.fillRect(0, 0, this.container.width, this.container.height); 
+  
+    setInterval(() =>{   
+      
+       this.context.fillStyle = '#f7f6f1';
+       this.context.fillRect(0, 0, this.container.width, this.container.height);
+  
+       let vx = Math.cos(currentAngle)*Radius;
+       let vy = Math.sin(currentAngle)*Radius;
+       
+       this.context.fillStyle = '#0f766e';
+       this.context.fillRect(baseX+vx, baseY+vy, 15, 15);
+       currentAngle+=0.1;
+  
+       }, 100)
+  }
 
   MapInitialize(): void {
     this.map = new Map({
@@ -177,13 +213,6 @@ export class DashboardComponent implements OnInit {
   calc(angle: number):void{
     this.x = this.Iconlatitude + this.radius * Math.cos(angle)
     this.y = this.Iconlongitude + this.radius * Math.sin(angle)
-
-    //this.addPin(this.x, this.y)
-    console.log('latitude ' + this.x);
-    console.log('longtitude ' + this.y);
-    console.log('');
-    
-    
   }
 
     pinRotation = setInterval( ()=>{
@@ -192,7 +221,6 @@ export class DashboardComponent implements OnInit {
         this.angle = 0
       } else {
         this.calc(this.angle)
-        console.log(this.angle);
         
       }      
     }, 5000)
